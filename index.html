@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pension Fairness Vote</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9ff;
+      color: #222;
+      line-height: 1.6;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1, h2, h3 {
+      color: #005baa;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Signature Campaign for Fair, Reasonable, and Equitable Pension</h1>
+
+  <div class="section">
+    <h2>Legislative Proposal</h2>
+    <p>"AMENDING R.A. 8291 to include, among others, the provision: 'Monthly pension will automatically increase whenever there is an increase in the salary of the position at which the member retired'; in order to correct the unjust difference between the retirement benefits package granted to ordinary government employees versus those in the judiciary, Office of the Ombudsman, National Prosecution Service and AFP."</p>
+  </div>
+
+  <div class="section">
+    <h2>Current Laws on Automatic Pension Increase</h2>
+    <ul>
+      <li><strong>RA 9946</strong>: Automatically increases pensions of retired judiciary members.</li>
+      <li><strong>RA 11059</strong>: Applies salary upgrades to eligible Ombudsman officials and employees.</li>
+      <li><strong>RA 10071</strong>: Automatically increases pensions of retired prosecutors in the National Prosecution Service.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Who Is Covered?</h2>
+    <ul>
+      <li><strong>RA 9946:</strong> Justices and Judges, and their surviving legitimate spouses.</li>
+      <li><strong>RA 11059:</strong> Ombudsman, Deputies, Special Prosecutor, legal employees from SG 26–29 with certain qualifications.</li>
+      <li><strong>RA 10071:</strong> Officers and members of the National Prosecution Service.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Why This Is Unfair</h2>
+    <p>The current laws exclude rank-and-file employees and most government executives. We have served the public with dedication and yet are denied the automatic pension increases enjoyed by a few. This disparity is:</p>
+    <ul>
+      <li><strong>Unfair:</strong> We already earn and receive less, yet we face the same cost of living.</li>
+      <li><strong>Unreasonable:</strong> Retired positions should not define post-retirement worth.</li>
+      <li><strong>Discriminatory:</strong> It divides retirees into privileged and forgotten classes.</li>
+      <li><strong>Demoralizing:</strong> It kills the motivation of those still in service and nearing retirement.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>What You Can Do</h2>
+    <p>We’re not against RAs 9946, 11059, or 10071. We want an inclusive law for ALL retirees — that ensures automatic pension increases across the board. Support the movement, start chapters in your office or community, and VOTE below to make your voice count.</p>
+  </div>
+
+  <form id="voteForm">
+    <h2>🗳️ Do you support this proposal?</h2>
+
+    <label for="name">Your Name</label>
+    <input type="text" id="name" required />
+
+    <label for="position">Your Government Position</label>
+    <input type="text" id="position" required />
+
+    <label for="vote">Your Vote</label>
+    <select id="vote" required>
+      <option value="">-- Select an Option --</option>
+      <option value="Yes">✅ YES - I support the automatic pension increase</option>
+      <option value="No">❌ NO - I do not support this proposal</option>
+    </select>
+
+    <button type="submit">Submit My Vote</button>
+  </form>
+
+  <script>
+    const scriptURL = 'https://sheetdb.io/api/v1/6qi6lil52k4dh';
+
+    document.getElementById("voteForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const position = document.getElementById("position").value;
+      const vote = document.getElementById("vote").value;
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify({
+          data: {
+            Name: name,
+            Position: position,
+            Vote: vote,
+            Timestamp: new Date().toISOString()
+          }
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("✅ Your vote has been recorded. Thank you!");
+          document.getElementById("voteForm").reset();
+        } else {
+          alert("❌ Something went wrong. Please try again later.");
+        }
+      })
+      .catch(err => {
+        console.error("Error submitting vote:", err);
+        alert("⚠️ Submission failed. Check your internet connection.");
+      });
+    });
+  </script>
+</body>
+</html>
